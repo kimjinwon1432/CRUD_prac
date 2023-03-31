@@ -1,0 +1,10 @@
+package main.service;
+
+public interface CrudService {
+	/* 저장처리 */
+	public String insertUser(CrudVO vo) throws Exception;
+	public String insertLogin(CrudVO vo) throws Exception;
+	public String insertAgreement(CrudVO vo) throws Exception;
+	public String checkID(String id);
+}
+

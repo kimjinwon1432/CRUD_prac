@@ -1,0 +1,19 @@
+package main.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import main.service.CrudService;
+import main.service.CrudVO;
+
+@Service("crudService")
+public class CrudServiceImpl implements CrudService{
+	
+	@Resource(name="crudDAO")
+	
+	@Override
+	public String insertUser(CrudVO vo) throws Exception {
+		
+		return crudDAO.insertUser(vo);
+	}
+
+}

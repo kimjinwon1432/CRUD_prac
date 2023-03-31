@@ -1,0 +1,14 @@
+package main.service.impl;
+
+import main.service.CrudService;
+import main.service.CrudVO;
+
+public class CrudServiceImpl implements CrudService{
+
+	@Override
+	public String insertUser(CrudVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

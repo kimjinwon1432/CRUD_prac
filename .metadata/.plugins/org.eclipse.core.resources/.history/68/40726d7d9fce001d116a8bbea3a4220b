@@ -1,0 +1,63 @@
+package main.web;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import main.service.CrudService;
+import main.service.CrudVO;
+
+@Controller
+public class CrudController {
+
+	@Resource(name="crudService")
+	private CrudService crudService;
+
+	@RequestMapping(value = "/mainPage.do")
+	public String mainpage() {
+		
+		return "/CRUD/main";
+	}
+	
+	@RequestMapping(value = "/login.do")
+	public String login() {
+		
+		return "/CRUD/login";
+	}
+
+	/*
+	 * 회원등록화면
+  	 */
+	
+	@RequestMapping(value="/join.do")
+	@ResponseBody
+	public String join(CrudVO vo) throws Exception {
+		String message ="";
+		String result = crudService.insertMember(vo);
+		
+		if(result == null) {
+			message ="ok";
+		}
+		
+		return message;
+	}
+	
+//	@RequestMapping(value="/joinSubmit.do")
+//	public String insertUser(CrudVO vo) throws Exception{
+//		
+//		System.out.println(vo);
+//		
+//		String result = crudService.InsertUser(vo);
+//		
+//		return "";
+//	}
+	
+	@RequestMapping(value="/agreement.do")
+	public String agree() {
+		
+		return "/CRUD/agreement";
+	}
+	
+}

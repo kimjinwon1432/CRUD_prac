@@ -1,0 +1,9 @@
+package main.service;
+
+public interface CrudService {
+	/* 저장처리 */
+	public String insertUser(CrudVO vo) {
+		return "";
+	}
+}
+

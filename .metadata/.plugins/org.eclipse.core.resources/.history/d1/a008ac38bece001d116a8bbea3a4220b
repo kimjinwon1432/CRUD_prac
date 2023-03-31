@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CrudSpace">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="CrudVO" type="main.service.CrudVO"/>
+
+	<insert id="crudDAO.insertUser">
+	
+		INSERT INTO userinfo(id, name, phone, email, address, postNum) 
+		VALUES (#id#,#name#,#phone#,#email#,#address#,#postNum#)
+	</insert>	
+	<insert id="crudDAO.insertLogin">
+		INSERT INTO logininfo(id, password)
+		VALUES (#id#,#password#)
+	</insert>
+	<insert id="crudDAO.insertAgreement">
+		INSERT INTO agreement(id)
+		VALUES (#id#)
+	</insert>
+
+</sqlMap>

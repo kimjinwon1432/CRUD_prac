@@ -1,0 +1,50 @@
+package main.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
+import main.service.CrudVO;
+
+@Repository("crudDAO")
+public class CrudDAO extends EgovAbstractDAO{
+
+	public String insertUser(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return (String) insert("crudDAO.insertUser", vo);
+	}
+
+	public String insertLogin(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return (String) insert("crudDAO.insertLogin", vo);
+	}
+
+	public String insertAgreement(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return (String) insert("crudDAO.insertAgreement", vo);
+	}
+
+	public int checkId(String id) {
+		// TODO Auto-generated method stub
+		return (Integer) select("crudDAO.checkId", id);
+	}
+
+	public List<?> selectUserList(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return list("crudDAO.selectUserList",vo);
+	}
+
+	public CrudVO selectUserDetail(String id) {
+		// TODO Auto-generated method stub
+		return (CrudVO) select("crudDAO.selectUserdetail", id);
+	}
+
+	public String modifyUser(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return (String) insert("crudDAO.modifyUser", vo);
+	}
+	
+	
+	
+}

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+<!-- 헤더와 푸터 -->
+	html,body{
+		margin: 0;
+		font-size:1.2em;
+    	height:100%;
+		display:block;
+	}
+	#header{
+		background-color: #5b9bd5;
+		display: flex;
+		flex-wrap: nowrap;
+	}
+	#header > span:first-child {
+		font-size:x-large;
+		flex: auto;
+	}
+	.btn_top{
+		display: block;
+		width: 3em;
+		margin: 5px;
+		background-color: #bdd7ee;
+		text-decoration: none;
+		padding: 10px;
+		font-size:1rem;
+		padding:5px;
+		width: inherit;
+	}
+	.btn_top:hover{
+		background-color: #1a4a70;
+   		color: white;
+	}
+	#footer{
+		background-color: #1f4e79;
+		height: 20%;
+	}
