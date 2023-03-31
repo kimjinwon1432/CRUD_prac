@@ -56,8 +56,8 @@
 			dataType:"text",
 			
 			/*전송 후 세팅*/
-			success: function(result){
-				if(result =="success"){
+			success: function("success"){
+				if(result ==1){
 					alert("수정완료");
 					location.reload(); // 사용자 정보 수정 후, 변경된 정보가 새로고침되어 출력됨.
 				} else{

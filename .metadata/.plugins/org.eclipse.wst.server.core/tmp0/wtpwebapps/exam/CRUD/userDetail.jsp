@@ -24,8 +24,7 @@
  		if(confirm("정말 삭제하시겠습니까?")){
  			//ajax
  			var id=$("#id").val();
- 			console.log(id);
- 			
+
  			$.ajax({
  				type: "POST",
  				url: "userDelete.do",
@@ -49,7 +48,6 @@
  	$("#btn_modify").click(function(){
 		//ajax
 		var formData=$("#frm").serialize();
-		console.log(result);
 		$.ajax({
 			/*전송 전 세팅*/
 			type: "POST",
@@ -59,7 +57,7 @@
 			
 			/*전송 후 세팅*/
 			success: function(result){
-				if(result ==1){
+				if(result =="success"){
 					alert("수정완료");
 					location.reload(); // 사용자 정보 수정 후, 변경된 정보가 새로고침되어 출력됨.
 				} else{

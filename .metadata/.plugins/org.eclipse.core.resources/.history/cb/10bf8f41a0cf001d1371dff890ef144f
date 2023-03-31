@@ -62,7 +62,9 @@ public class CrudController {
 	@RequestMapping(value="/checkId.do")
 	@ResponseBody
 	public String checkId(String id) throws Exception{
+		System.out.println(id);
 		int result = crudService.checkId(id);
+		System.out.println(result);
 		if(result>0) return "duplicated";
 		else 		 return "available";
 	}
@@ -102,17 +104,15 @@ public class CrudController {
 		return "/CRUD/userDetail";
 	}
 	@RequestMapping(value="/userModifySave.do")
-	@ResponseBody
-	public String userModifySave(CrudVO vo, ModelMap model) throws Exception{
+	public int userModifySave(CrudVO vo, ModelMap model) throws Exception{
 		System.out.println("vo: "+vo.getId()+" "+vo.getName()+" "+vo.getPhone()+" "+vo.getPostNum());
 		int result = crudService.modifyUser(vo);
-		String msg=(result>0)?"success":"faile";
+		int msg=(result>0)?1:0;
 		
 		model.addAttribute("id", vo.getId());
 		return msg;
 	}
 	@RequestMapping(value="/userDelete.do")
-	@ResponseBody
 	public String userDelete(String id, ModelMap model) throws Exception{
 		
 		crudService.agreeDelete(id);

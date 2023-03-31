@@ -103,16 +103,15 @@ public class CrudController {
 	}
 	@RequestMapping(value="/userModifySave.do")
 	@ResponseBody
-	public String userModifySave(CrudVO vo, ModelMap model) throws Exception{
+	public int userModifySave(CrudVO vo, ModelMap model) throws Exception{
 		System.out.println("vo: "+vo.getId()+" "+vo.getName()+" "+vo.getPhone()+" "+vo.getPostNum());
 		int result = crudService.modifyUser(vo);
-		String msg=(result>0)?"success":"faile";
+		int msg=(result>0)?1:0;
 		
 		model.addAttribute("id", vo.getId());
 		return msg;
 	}
 	@RequestMapping(value="/userDelete.do")
-	@ResponseBody
 	public String userDelete(String id, ModelMap model) throws Exception{
 		
 		crudService.agreeDelete(id);
