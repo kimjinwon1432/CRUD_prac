@@ -14,5 +14,7 @@ public interface CrudService {
 	public int userDelete(String id) throws Exception;
 	public int loginDelete(String id) throws Exception;
 	public int agreeDelete(String id) throws Exception;
+	public List<?> sortUserListById() throws Exception;
+	public List<?> sortUserListByAgreedate() throws Exception;
 }
 

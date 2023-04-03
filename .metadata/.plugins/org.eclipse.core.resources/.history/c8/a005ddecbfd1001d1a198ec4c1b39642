@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CrudSpace">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="crudVO" type="main.service.CrudVO"/>
+
+	<insert id="crudDAO.insertUser">
+	
+		INSERT INTO userinfo(id, name, phone, email, address, postNum) 
+		VALUES (#id#,#name#,#phone#,#email#,#address#,#postNum#)
+	</insert>	
+	<insert id="crudDAO.insertLogin">
+		INSERT INTO logininfo(id, password)
+		VALUES (#id#,#password#)
+	</insert>
+	<insert id="crudDAO.insertAgreement">
+		INSERT INTO agreement(id)
+		VALUES (#id#)
+	</insert>
+									<!-- java.lang.Integer -->
+	<select id="crudDAO.checkId" resultClass="int">
+		SELECT COUNT(*) from userinfo where id=#id#
+	</select>
+	
+	<select id="crudDAO.selectUserList" resultClass="egovMap">
+	<choose>
+		<when test="searchType=='id'">
+			SELECT  u.id, 
+					u.name, 
+					u.phone, 
+					(SELECT to_char(a.agreedate, 'yyyy-mm-dd') FROM agreement a WHERE a.id = u.id)
+					 as agreedate
+			FROM userinfo u
+			ORDER BY #searchType# 
+		</when>
+		<when test="searchType=='agreedate'"></when>
+		<otherwise>
+			SELECT  u.id, 
+				u.name, 
+				u.phone, 
+				(SELECT to_char(a.agreedate, 'yyyy-mm-dd') FROM agreement a WHERE a.id = u.id)
+					 as agreedate
+			FROM userinfo u
+			ORDER BY (SELECT a.agreedate FROM agreedate a WHERE a.id =u.id) ASC 
+		
+		</otherwise>		
+	</choose>
+	</select>
+	<select id="crudDAO.selectUserdetail" resultClass="crudVO">
+		SELECT  u.*
+		FROM userinfo u
+		WHERE u.id = #id#
+	</select>
+
+	<update id="crudDAO.modifyUser" >
+		UPDATE userinfo  
+			set	name=#name#, 
+				email=#email#, 
+				phone=#phone#, 
+				address=#address#, 
+				postnum=#postNum#
+			WHERE id like #id#
+	</update>
+	
+	<delete id="crudDAO.userDelete">
+		DELETE FROM userinfo WHERE id like #id#
+	</delete>
+	
+	<delete id="crudDAO.loginDelete">
+		DELETE FROM logininfo WHERE id like #id#
+	</delete>
+	
+	<delete id="crudDAO.agreeDelete">
+		DELETE FROM agreement WHERE id like #id#
+	</delete>
+	
+</sqlMap>	

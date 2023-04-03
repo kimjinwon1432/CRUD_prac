@@ -75,4 +75,17 @@ public class CrudServiceImpl implements CrudService{
 		return crudDAO.agreeDelete(id);
 	}
 
+	@Override
+	public List<?> sortUserListById() throws Exception {
+		// TODO Auto-generated method stub
+		return crudDAO.sortUserListById();
+	}
+
+	@Override
+	public List<?> sortUserListByAgreedate() throws Exception {
+		// TODO Auto-generated method stub
+		return crudDAO.sortUserListByAgreedate();
+	}
+
+
 }

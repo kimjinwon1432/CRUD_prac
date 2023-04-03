@@ -47,7 +47,10 @@
 		padding-left: 40px;
 		padding-right: 40px;	
 	}
-
+	#pw_validation{
+		font-size: 0.1em;
+		color: red;
+	}
 	
 </style>
 
@@ -83,6 +86,8 @@ $(function(){
 		
 		
 	});
+	
+	function hello(){ console.log("hello");}
 	//회원가입 버튼
 	$("#btn_submit").click(function () {
 		var id = $("#id").val();
@@ -110,6 +115,10 @@ $(function(){
 			alert("이름을 입력해주세요");
 			return false;
 		}		
+		if(pwValCheck()){
+			alert("비밀번호를 양식에맞춰 입력해주세요");
+			return false;	
+		}
 		
 		//ajax
 		var formData=$("#frm").serialize();
@@ -135,23 +144,54 @@ $(function(){
 		});
 		
 	});
+
+	$("#pw_validation").html("특수문자, 소/대문자영어, 숫자가 각 1개이상 포함된 4자리 이상의 비밀번호를 입력하세요.");
 	
+	function fn_pwValCheck(){
+		var pwInputCheck="^(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]),{4,}$";
+		
+		var pw = $("#password").val();
+		var senChk=pw.search(/[a-z]/g);
+		var SenChk=pw.search(/[A-Z]/g);
+		var numChk=pw.search(/[0-9]/g);
+		var spChk = pw.search(/[!@#$%^&*]/g);
+		console.log(senChk, SenChk, numChk, spChk);
+		if(senChk!==-1 && SenChk!==-1 && numChk!==-1 && spChk!==-1 && pw.length>=4){ // all true
+			$("#pw_validation").html("보안강도가 좋습니다.");
+			$("#pw_validation").css("color", "blue");
+			return true;
+		} else{ //정규식에 맞지 않을 경우 false
+			$("#pw_validation").html("특수문자, 소/대문자영어, 숫자가 각 1개이상 포함된 4자리 이상의 비밀번호를 입력하세요.");
+			$("#pw_validation").css("color", "red");
+			return false;
+		}
+		
+	}
+
 	$("#password, #passwordCheck").on('keyup', function(){
+		
 		var pw = $("#password").val();
 		var pwCheck=$("#passwordCheck").val();
-		if(pw!="" || pwCheck!=""){
-			if(pw == pwCheck){
-				$("#pw_check").removeClass("block");
+		
+		fn_pwValCheck();
+		
+		if(pw!="" && pwCheck!=""){ //pw입력 후 pwCheck란에 입력 시
+			$("#pw_check").removeClass("block");
+			
+			if(pw == pwCheck){ //둘이 일치
 				$("#pw_check").html("비밀번호가 일치합니다.<br>");
 				console.log($("#pw_check").innerText);
 				$("#pw_check").css("color", "blue");
 			}
-			else{
-				$("#pw_check").removeClass("block");
+			else{ //둘이 다름
 				$("#pw_check").html("비밀번호가 일치하지 않습니다.<br>");
 				$("#pw_check").css("color", "red");
 			}
-		} //eof
+			$("#pw_check").show()
+			
+		} else{
+				$("#pw_check").addClass("block");
+			}
 	});
 	
 }); 
@@ -185,7 +225,9 @@ $(document).ready(function() {
 			</tr>
 			<tr>
 				<th><label for="password">비밀번호</label></th>
-				<td><input type="password" name="password" id="password"placeholder="비밀번호"></td>
+				<td>
+				<span id="pw_validation" ></span><br>
+				<input type="password" name="password" id="password"placeholder="비밀번호"></td>
 			</tr>
 			<tr>
 				<th><label for="passwordCheck">비밀번호확인</label></th>

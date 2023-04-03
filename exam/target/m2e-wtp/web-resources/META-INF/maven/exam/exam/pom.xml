@@ -19,6 +19,8 @@
 	<properties>
 	    <spring.maven.artifact.version>4.3.16.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.8.0</egovframework.rte.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<porject.reporting.outputEncoding>UTF-8</porject.reporting.outputEncoding>
 	</properties>
 
 	<repositories>

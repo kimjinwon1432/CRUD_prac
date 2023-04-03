@@ -32,6 +32,24 @@ td, th{
 	border: 1px solid #333333;
 }
 </style>
+<script>
+$(function(){
+	$("#btnSearch").click(function() {
+		var sortValue= $("#sort").val();
+		if(sortValue!=="none"){
+			var url ="userList.do?sort=" +sortValue;
+			window.location.href=url;
+		}
+	});
+	//페이지 로드 시 select 설정
+	var urlParams= new URLSearchParams(window.location.search);
+	var sortParams = urlParams.get("sort");
+	if(sortParams)  //sortParams가 null이면 아무런 동작안함!
+		$("#sort").val(sortParam);
+	
+});
+
+</script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -45,13 +63,15 @@ td, th{
 <div id= "wrap_cont">
 
 <form id="frm" name="frm" method="post" action="userList.do">
-	<table>
+	<table id="resultTable">
 	<caption id="tbCaption">
 		<div>회원 목록</div>
-		<select name="searchType" id="searchType">
+		<select name="sort" id="sort">
+			<option value="none" selected>선택</option>
 			<option value="id">id</option>
 			<option value="agreedate">가입날짜</option>
 		</select>
+		<input type="button" id="btnSearch" value="검색"></input>
 	</caption>
 		<!-- id, name, phone -->
 	<colgroup>

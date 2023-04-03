@@ -38,11 +38,11 @@ public class CrudController {
 	public String join() {
 		return "/CRUD/join";
 	}
-	
+
 	@RequestMapping(value="/joinSave.do")
 	@ResponseBody
 	public String joinSave(CrudVO vo) throws Exception {
-		
+
 		System.out.println("vo: "+ vo.getPhone());
 		vo.setPhone(vo.getPhone().replace("-", ""));
 		System.out.println("vo: "+ vo.getPhone());
@@ -83,34 +83,48 @@ public class CrudController {
 	}
 	
 	@RequestMapping(value="/userList.do")
-	public String userList(CrudVO vo, ModelMap model) throws Exception{
+	public String userList( CrudVO vo, ModelMap model) throws Exception{
+		System.out.println("select: "+ vo.getSort() + "  " + vo.getSort());
 		
-		int unit=10;
-		
-		//사용자 목록 불러오기
-		List<?> list = crudService.selectUserList(vo);
-		System.out.println("list : "+list);
+		List<?> list;
+		//sort 점검
+		if("id".equals(vo.getSort())){
+			list = crudService.sortUserListById();
+		} else  if("agreedate".equals(vo.getSort())) {
+			list = crudService.sortUserListByAgreedate();
+		}
+		else {
+			list = crudService.selectUserList(vo);
+		} 
+		System.out.println("list:    "+ list);
 		model.addAttribute("resultList", list);
-		
+		model.addAttribute("sort", vo.getSort());
+
+		//사용자 목록 불러오기
+
+		System.out.println("sort: "+ vo.getSort());
 		return "/CRUD/userList";
 	}
+	
+	
 	@RequestMapping(value="/userDetail.do")
 	public String userDetail(String id, ModelMap model) throws Exception{
-		
 		CrudVO vo = crudService.selectUserdetail(id);
 		model.addAttribute("crudVO", vo);
 		return "/CRUD/userDetail";
 	}
+	
 	@RequestMapping(value="/userModifySave.do")
 	@ResponseBody
 	public String userModifySave(CrudVO vo, ModelMap model) throws Exception{
 		System.out.println("vo: "+vo.getId()+" "+vo.getName()+" "+vo.getPhone()+" "+vo.getPostNum());
 		int result = crudService.modifyUser(vo);
-		String msg=(result>0)?"success":"faile";
+		String msg=(result>0)?"success":"fail";
 		
 		model.addAttribute("id", vo.getId());
 		return msg;
 	}
+	
 	@RequestMapping(value="/userDelete.do")
 	@ResponseBody
 	public String userDelete(String id, ModelMap model) throws Exception{
@@ -118,9 +132,10 @@ public class CrudController {
 		crudService.agreeDelete(id);
 		crudService.loginDelete(id);
 		int result = crudService.userDelete(id);
-		String msg=(result>0)?"success":"faile";
+		String msg=(result>0)?"success":"fail";
 				
 		return msg;	
-
 	}
+
+
 }
