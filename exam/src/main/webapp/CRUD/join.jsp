@@ -51,19 +51,63 @@
 		font-size: 0.1em;
 		color: red;
 	}
-	
+	#pw_check{font-size: 0.1em;}
 </style>
 
 <script> 
 $(function(){
+	//check Input
+	var checkID=false;
+	var checkPW=false;
+	//check Validation
+	var checkIdVal=false;
+	var checkPwVal=false;
+	
+	//input #id
+	var idKeyUp = function () {
+		var id = $.trim($("#id").val());
+		
+		//id 정규식
+		var sEnChk=id.search(/[a-z]/g); // Small en Check
+		var numChk=id.search(/[0-9]/g);
+		
+		
+		if(id.length <4)
+		if(sEnChk ===-1 && numChk===-1){
+			checkIdVal=false;
+		} else{
+			checkIdVal=true;
+			
+		}
+		console.log("keyup..checkIdVal: ",checkIdVal);
+		console.log(sEnChk, numChk);
+	}
+	$("#id").on('keyup', idKeyUp);
+	
+	
+	
 	//id 중복확인 버튼
 	$("#btn_idCheck").click(function(){
 		var id = $.trim($("#id").val());
+		checkID=false;
+		console.log("btn_idCheck: ",checkID);
+		console.log()
 		if(id==""){
 			alert("아이디를 입력해주세요");
 			$("#id").focus();
 			return false;
 		}
+		
+		if(id.length < 4){
+			alert("아이디는 4자리 이상 입력해주세요.");
+			return false;
+		}
+		
+		if(checkIdVal){
+			alert("아이디에 알파벳 소문자와 숫자만 사용하세요.");
+			return false;
+		}
+		
 		
 		$.ajax({
 			type:"POST",
@@ -72,9 +116,13 @@ $(function(){
 			dataType: "text", //리턴타입
 			success: function(result){
 				if(result=="available"){
+					checkID=true;
+					console.log("btn_idCheck..ajax: ",checkID);
 					alert("사용가능한 아이디입니다.");
 				}
 				else {
+					checkID=false;
+					console.log("btn_idCheck..ajax: ",checkID);
 					alert("이미 사용중인 아이디입니다.");
 					$("#id").focus();
 				}
@@ -87,7 +135,6 @@ $(function(){
 		
 	});
 	
-	function hello(){ console.log("hello");}
 	//회원가입 버튼
 	$("#btn_submit").click(function () {
 		var id = $("#id").val();
@@ -106,20 +153,29 @@ $(function(){
 		if(id ==""){
 			alert("아이디를 입력해주세요");
 			return false;
-		}		
+		} 
+		if(!checkID){
+			alert("아이디 중복검사를 해주세요");
+			return false;
+		}
+		
 		if(password ==""){
 			alert("비밀번호를 입력해주세요");
 			return false;
-		}		
+		} 
+		if(!checkPW){ //checkPW == false 일때
+			alert("비밀번호를 다시 확인해주세요");
+			return false;
+		}
+		if(!checkPwVal){ //checkPWVal == false 일때 .. validation이 틀릴때
+			alert("비밀번호 확인을 다시 입력해주세요");
+			return false;
+		}
+		
 		if(name ==""){
 			alert("이름을 입력해주세요");
 			return false;
-		}		
-		if(pwValCheck()){
-			alert("비밀번호를 양식에맞춰 입력해주세요");
-			return false;	
-		}
-		
+		}	
 		//ajax
 		var formData=$("#frm").serialize();
 		$.ajax({
@@ -146,24 +202,25 @@ $(function(){
 	});
 
 	$("#pw_validation").html("특수문자, 소/대문자영어, 숫자가 각 1개이상 포함된 4자리 이상의 비밀번호를 입력하세요.");
+
 	
 	function fn_pwValCheck(){
 		var pwInputCheck="^(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]),{4,}$";
 		
 		var pw = $("#password").val();
-		var senChk=pw.search(/[a-z]/g);
-		var SenChk=pw.search(/[A-Z]/g);
+		var sEnChk=pw.search(/[a-z]/g); // Small en Check
+		var lEnChk=pw.search(/[A-Z]/g); // Large en Check
 		var numChk=pw.search(/[0-9]/g);
 		var spChk = pw.search(/[!@#$%^&*]/g);
-		console.log(senChk, SenChk, numChk, spChk);
-		if(senChk!==-1 && SenChk!==-1 && numChk!==-1 && spChk!==-1 && pw.length>=4){ // all true
+		console.log(sEnChk, lEnChk, numChk, spChk);
+		if(sEnChk!==-1 && lEnChk!==-1 && numChk!==-1 && spChk!==-1 && pw.length>=4){ // all true
 			$("#pw_validation").html("보안강도가 좋습니다.");
 			$("#pw_validation").css("color", "blue");
-			return true;
+			checkPW= true;
 		} else{ //정규식에 맞지 않을 경우 false
 			$("#pw_validation").html("특수문자, 소/대문자영어, 숫자가 각 1개이상 포함된 4자리 이상의 비밀번호를 입력하세요.");
 			$("#pw_validation").css("color", "red");
-			return false;
+			checkPW= false;
 		}
 		
 	}
@@ -182,16 +239,19 @@ $(function(){
 				$("#pw_check").html("비밀번호가 일치합니다.<br>");
 				console.log($("#pw_check").innerText);
 				$("#pw_check").css("color", "blue");
+				checkPwVal = true;
 			}
 			else{ //둘이 다름
 				$("#pw_check").html("비밀번호가 일치하지 않습니다.<br>");
 				$("#pw_check").css("color", "red");
+				checkPwVal = false;
 			}
 			$("#pw_check").show()
 			
 		} else{
 				$("#pw_check").addClass("block");
 			}
+		console.log("checkPwVal: ",checkPwVal);
 	});
 	
 }); 
