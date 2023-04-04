@@ -2,33 +2,38 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="crudDAO.selectUserdetail" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="검색"/>
-			<item value="properties"/>
-			<item value="pro"/>
-			<item value="utf"/>
-			<item value="joinsave"/>
-			<item value="fn_egov_select"/>
-			<item value="SAMPLE-00004"/>
-			<item value="sample-00004"/>
-			<item value="sample00004"/>
-			<item value="fn_egov_"/>
-			<item value="resultList"/>
-			<item value="&#x09;&#x09;int unit=10;"/>
+			<item value="crudDAO.selectUserdetail"/>
+			<item value="selectUserdetail"/>
+			<item value="insertUser"/>
+			<item value="회원가입"/>
+			<item value="console.log(phone)"/>
+			<item value="consol.log(phone)"/>
+			<item value="phone1"/>
+			<item value="#"/>
+			<item value="#phone"/>
+			<item value="join"/>
+			<item value="selectUserList"/>
+			<item value="사용가능한"/>
+			<item value="btn_idCheck"/>
+			<item value="checkPWVal"/>
+			<item value="pw"/>
 		</list>
 		<list key="replacehistory">
+			<item value="$"/>
+			<item value="checkPwVal"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="288" key="DIALOG_WIDTH"/>
 		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="918" key="DIALOG_X_ORIGIN"/>
-		<item value="286" key="DIALOG_Y_ORIGIN"/>
+		<item value="1240" key="DIALOG_X_ORIGIN"/>
+		<item value="239" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
