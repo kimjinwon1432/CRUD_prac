@@ -15,11 +15,69 @@
 <style>
 	html,body{
 		margin: auto 0;
+	}	
+	#tr_phone{
+		display: inline-block;
+	}
+	#phone1{
+		width: 13%;
+	}
+	#phone2, #phone3{
+		width:22%;
 	}
 
 </style>
 <script>
  $(function(){
+	 
+	 var phone1Val = false;
+		var phone2Val = false;
+		var phone3Val = false;
+		
+		//input #phone1,2,3 정규식 맞게 입력받기 
+		$("#phone1").on('keyup',function() {
+			var check =$.isNumeric($("#phone1").val());
+			var regex = /^01([0|1|6|7|8|9]){1}$/;
+			
+			if($(this).val()!=="" && !check){
+				alert("숫자만 입력하세요");
+				$(this).val(""); 
+				$(this).focus();
+			} else{
+				if( $(this).val().length==3 && !regex.test($(this).val())){
+					alert("올바른 번호가 아닙니다.");
+					$(this).val("");
+					return false;
+				}
+				
+			}
+			if($(this).val().length==3) $("#phone2").focus();
+		});
+		$("#phone2").on('keyup',function() {
+			var check =$.isNumeric($("#phone2").val());
+			var regex = /^([0-9]){4}$/;
+			
+			if($(this).val()!=="" && (!check || $(this).val().search(/\s/) != -1)){
+				alert("숫자만 입력하세요"); 
+				$(this).val("");
+				$(this).focus();
+			}
+			else if($(this).val().length==4 && regex.test($(this).val())) { 
+				phone3Val=true;
+				$("#phone3").focus();
+			}
+		});
+		$("#phone3").on('keyup',function() {
+			var check =$.isNumeric($("#phone3").val());
+			if($(this).val()!=="" && (!check || $(this).val().search(/\s/) != -1) ){
+				alert("숫자만 입력하세요");
+				$(this).val(""); 
+				$(this).focus();
+			} 
+			else if(check&&$(this).val().length==4) phone3Val=true;
+		});
+		
+	 
  	$("#btn_delete").click(function(){
  		if(confirm("정말 삭제하시겠습니까?")){
  			//ajax
@@ -71,6 +129,8 @@
 		});
 		
 	});
+ 	
+	
 }); 
 </script>
 </head>
@@ -105,7 +165,11 @@
 		</tr>
 		<tr>
 			<th><label for="phone">전화번호</label></th>
-			<td><input type="text" name="phone" id="phone" value="${crudVO.phone }"><br> (예: 010-1234-1234)
+			<td id="tr_phone">
+					<input type="text" name="phone" id="phone" maxlength="13" value="${crudVO.phone}"> (예: 010-1234-1234) <br>
+					<input type="text" name="phone1" id="phone1" maxlength="3" value="${crudVO.phone1}" size=2/> -
+					<input type="text" name="phone2" id="phone2" maxlength="4" value="${crudVO.phone2}" size=3/> -
+					<input type="text" name="phone3" id="phone3" maxlength="4" value="${crudVO.phone3}" size=3/>
 			</td>
 		</tr>
 		<tr>

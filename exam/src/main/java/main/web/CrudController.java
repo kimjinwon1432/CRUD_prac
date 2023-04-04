@@ -43,19 +43,19 @@ public class CrudController {
 	@ResponseBody
 	public String joinSave(CrudVO vo) throws Exception {
 
-		System.out.println("vo: "+ vo.getPhone());
-		vo.setPhone(vo.getPhone().replace("-", ""));
-		System.out.println("vo: "+ vo.getPhone());
-
-		String message ="";
-		String result = crudService.insertUser(vo);
-		crudService.insertLogin(vo);
-		crudService.insertAgreement(vo);
+		vo.setPhone(vo.getPhone1() +
+					vo.getPhone2() +
+					vo.getPhone3());
 		
-		if(result == null) {
+		String message ="";
+		String result01 = crudService.insertUser(vo);
+		String result02 = crudService.insertLogin(vo);
+		String result03 = crudService.insertAgreement(vo);
+		
+		System.out.println(vo.getId() +" " + vo.getName());
+		if(result01 == null && result02 == null && result03 == null) {
 			message ="ok";
 		}
-		
 		return message;
 	}
 	
@@ -86,16 +86,18 @@ public class CrudController {
 	public String userList( CrudVO vo, ModelMap model) throws Exception{
 		System.out.println("select: "+ vo.getSort() + "  " + vo.getSort());
 		
-		List<?> list;
-		//sort 점검
-		if("id".equals(vo.getSort())){
-			list = crudService.sortUserListById();
-		} else  if("agreedate".equals(vo.getSort())) {
-			list = crudService.sortUserListByAgreedate();
-		}
-		else {
-			list = crudService.selectUserList(vo);
-		} 
+//		List<?> list;
+//		//sort 점검
+//		if("id".equals(vo.getSort())){
+//			list = crudService.sortUserListById();
+//		} else  if("agreedate".equals(vo.getSort())) {
+//			list = crudService.sortUserListByAgreedate();
+//		}
+//		else {
+//			list = crudService.selectUserList(vo);
+//		} 
+		
+		List<?> list = crudService.selectUserList(vo);
 		System.out.println("list:    "+ list);
 		model.addAttribute("resultList", list);
 		model.addAttribute("sort", vo.getSort());
@@ -110,6 +112,13 @@ public class CrudController {
 	@RequestMapping(value="/userDetail.do")
 	public String userDetail(String id, ModelMap model) throws Exception{
 		CrudVO vo = crudService.selectUserdetail(id);
+		System.out.println("phone: "+vo.getPhone() +" " + vo.getPhone1());
+
+		vo.setPhone1((String)vo.getPhone().subSequence(0, 3));
+		vo.setPhone2((String)vo.getPhone().subSequence(3, 7));
+		vo.setPhone3((String)vo.getPhone().subSequence(7, 11));
+		
+		
 		model.addAttribute("crudVO", vo);
 		return "/CRUD/userDetail";
 	}
@@ -117,9 +126,15 @@ public class CrudController {
 	@RequestMapping(value="/userModifySave.do")
 	@ResponseBody
 	public String userModifySave(CrudVO vo, ModelMap model) throws Exception{
+		
+		
 		System.out.println("vo: "+vo.getId()+" "+vo.getName()+" "+vo.getPhone()+" "+vo.getPostNum());
 		int result = crudService.modifyUser(vo);
 		String msg=(result>0)?"success":"fail";
+
+		vo.setPhone(vo.getPhone1() +
+					vo.getPhone2() +
+					vo.getPhone3());
 		
 		model.addAttribute("id", vo.getId());
 		return msg;

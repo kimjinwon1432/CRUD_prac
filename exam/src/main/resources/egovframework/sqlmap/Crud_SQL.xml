@@ -7,9 +7,9 @@
 	<typeAlias  alias="crudVO" type="main.service.CrudVO"/>
 
 	<insert id="crudDAO.insertUser">
-	
 		INSERT INTO userinfo(id, name, phone, email, address, postNum) 
 		VALUES (#id#,#name#,#phone#,#email#,#address#,#postNum#)
+<!-- 		VALUES ($id$,$name$,$phone$,$email$,$address$,$postNum$) -->
 	</insert>	
 	<insert id="crudDAO.insertLogin">
 		INSERT INTO logininfo(id, password)
@@ -32,6 +32,7 @@
 				(SELECT to_char(a.agreedate, 'yyyy-mm-dd') FROM agreement a WHERE a.id = u.id)
 				 as agreedate
 		FROM userinfo u
+		ORDER BY $sort$
 	</select>	
 	
 	<select id="crudDAO.sortUserListById" resultClass="egovMap">
