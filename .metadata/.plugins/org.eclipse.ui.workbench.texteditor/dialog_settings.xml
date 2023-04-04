@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="joinSave" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="검색"/>
+			<item value="properties"/>
+			<item value="pro"/>
+			<item value="utf"/>
 			<item value="joinsave"/>
 			<item value="fn_egov_select"/>
 			<item value="SAMPLE-00004"/>
