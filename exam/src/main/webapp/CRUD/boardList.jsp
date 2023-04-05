@@ -13,10 +13,12 @@
 <head>
 <%-- <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/> --%>
 <style>
-	html,body{
+html,body{
 		margin: auto 0;
-	}
-
+}
+td{
+	text-align: center;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -88,30 +90,30 @@
 		<th>등록일</th>
 		<th>조회수</th>
 	</tr>
-	<c:set var="cnt" value="${rowNumber }"/>
+<%-- 	<c:set var="cnt" value="${rowNumber }"/> --%>
 	<c:forEach var ="result" items="${resultList }">
 	<tr>
-		<td><c:out value="${cnt }"/></td>
+		<td><c:out value="${result.boardnum }"/></td>
 		<td style="text-align:left;">
 			<a><c:out value="${result.title}"/></a>
 		</td>
-		<td><c:out value="${result.name}"/></td>
-		<td><c:out value="${result.rdate}"/></td>
+		<td><c:out value="${result.id}"/></td>
+		<td><c:out value="${result.regdate}"/></td>
 		<td><c:out value="${result.hits}"/></td>
 	</tr>
 	
-	<c:set var="cnt" value="${cnt-1 }"/>
+<%-- 	<c:set var="cnt" value="${cnt-1 }"/> --%>
 	</c:forEach>
 	</table>
 	
 	<div style="width: 80%; margin:auto; margin-top:5px; text-align:center;">
-		<c:forEach var="i" begin="1" end="${totalPage }">
-			<a href="boardList.do?viewPage=${i}"><c:out value="${i}"/></a>
-		</c:forEach>
+<%-- 		<c:forEach var="i" begin="1" end="${totalPage }"> --%>
+<%-- 			<a href="boardList.do?viewPage=${i}"><c:out value="${i}"/></a> --%>
+<%-- 		</c:forEach> --%>
 	</div>
 </form>
 <div id="bottom">
-	<button onclick="boardWrite.do">글쓰기</button>
+	<a id= "btn_top" href="boardWrite.do">글쓰기</a>
 </div>
 
 </div>

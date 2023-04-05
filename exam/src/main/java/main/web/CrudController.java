@@ -3,6 +3,7 @@ package main.web;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +30,25 @@ public class CrudController {
 
 		return "/CRUD/login";
 	}
+	
+	// login processing
+	@RequestMapping(value= "/loginCheck.do")
+	public String loginCheck(CrudVO vo, HttpSession session) {
+		
+		boolean result = true;
+//		crudService.loginCheck(vo, session);
+		
+		//login success
+		if(result == true) {
+			
+		}
+		//login fail
+		return null;
+		
+	}
+	
+	// logout processing
+	
 
 	/*
 	 * 회원등록화면
@@ -147,10 +167,5 @@ public class CrudController {
 		return msg;
 	}
 
-	@RequestMapping(value = "/boarList.do")
-	public String boardList() {
-
-		return "CRUD/boardList";
-	}
 
 }

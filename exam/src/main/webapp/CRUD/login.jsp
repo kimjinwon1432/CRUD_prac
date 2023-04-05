@@ -62,7 +62,7 @@
 	</div>
 <!-- 본문 -->
 	<div id="wrap_cont">
-	<form name="frm" method="post" action="lginSubmit.do">
+	<form name="frm" method="post" action="loginCheck.do">
 		<table>
 			<tr>
 				<th>ID</th>

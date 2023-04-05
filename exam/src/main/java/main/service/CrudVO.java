@@ -94,7 +94,9 @@ public class CrudVO {
 	}
 
 
-	
+	public String loginString() {
+		return "userinfo [id=" + id +"password="+password;
+	}
 	
 	
 }

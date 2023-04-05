@@ -35,26 +35,6 @@
 		ORDER BY $sort$
 	</select>	
 	
-	<select id="crudDAO.sortUserListById" resultClass="egovMap">
-		SELECT  u.id, 
-				u.name, 
-				u.phone, 
-				(SELECT to_char(a.agreedate, 'yyyy-mm-dd') FROM agreement a WHERE a.id = u.id)
-				 as agreedate
-		FROM userinfo u
-		ORDER BY id
-	</select>
-	
-	<select id="crudDAO.sortUserListByAgreedate" resultClass="egovMap">
-		SELECT  u.id, 
-			u.name, 
-			u.phone, 
-			(SELECT to_char(a.agreedate, 'yyyy-mm-dd') FROM agreement a WHERE a.id = u.id)
-				 as agreedate
-		FROM userinfo u
-		ORDER BY agreedate
-	</select>
-	
 	<select id="crudDAO.selectUserdetail" resultClass="crudVO">
 		SELECT  u.*
 		FROM userinfo u

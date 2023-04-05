@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BoardSpace">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="boardVO" type="main.service.boardVO"/>
+
+	<insert id="boardDAO.insertBoard">
+	insert into board(boardnum, title, id, contents, file_path, hits) 
+	    VALUES( board_seq.NEXTVAL,
+	           #title#, 
+	           #id#, 
+	           #contents#, 
+	           #file_path#, 
+	           #hits#
+	    )
+	</insert>
+
+	<select id="boardDAO.selectBoardList" resultClass="egovMap">
+		
+		SELECT b.* 
+		FROM (
+			SELECT 	rownum rn, 
+					a.* 
+			FROM(
+					SELECT 	boardnum, 
+							title, 
+							id, 
+							TO_CHAR(regdate,'YYYY/MM/DD HH24:MI:SS') regdate, 
+							hits 
+					FROM 	board) a ) b
+	<![CDATA[ 
+		WHERE rn >= $startIndex$ and rn <= $endIndex$
+ 	]]>
+	</select>
+	
+	<select id="selectBoardTotal" resultClass="java.lang.Integer">
+		SELECT COUNT(*) total FROM board
+	</select>
+
+</sqlMap>
