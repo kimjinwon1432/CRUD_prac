@@ -139,6 +139,8 @@
 <!-- 헤더 -->
 <div id="header">
 	<span>CRUD</span>
+	<a class="btn_top" href="boardList.do">게시판 목록</a>
+	<a class="btn_top" href="userList.do">회원목록</a>
 	<a class="btn_top" href="agreement.do">회원가입</a>
 	<a class="btn_top" href="login.do">로그인</a>
 </div>

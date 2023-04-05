@@ -52,6 +52,14 @@
 		background-color: #1f4e79;
 		height: 20%;
 	}
+	
+	#content01{
+		margin: auto;
+		width: 500px;
+		heigth: 1050px;
+		text-align: center;
+		padding: 100px 0px 100px 0px;
+	}
 
 </style>
 </head>
@@ -62,11 +70,15 @@
 <body>
 	<div id="header">
 		<span>CRUD</span>
+		<a class="btn_top" href="boardList.do">게시판 목록</a>
+		<a class="btn_top" href="userList.do">회원목록</a>
 		<a class="btn_top" href="agreement.do">회원가입</a>
 		<a class="btn_top" href="login.do">로그인</a>
 	</div>
 	<div id="wrap_cont">
-		<div id="content01"></div>
+		<div id="content01">
+			main Page
+		</div>
 	</div>
 	<div id="footer">
 	<span>김진원</span>

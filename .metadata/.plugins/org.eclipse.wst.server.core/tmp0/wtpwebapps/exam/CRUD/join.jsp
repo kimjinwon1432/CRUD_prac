@@ -297,14 +297,15 @@ $(function(){
 			alert("전화번호를 입력해주세요.");
 			return false;
 		}
-		if(!(phone1Val && phone2Val && phone3Val)) {
-			alert("전화번호를 완벽하게 입력해주세요.");
-			return false;
-		}
+// 		if(!(phone1Val && phone2Val && phone3Val)) {
+// 			alert("전화번호를 완벽하게 입력해주세요.");
+// 			return false;
+// 		}
 		if(email==""){
 			alert("이메일을 입력하세요");
 			return false;
 		}
+		
 		if(postNum=="" || address ==""){
 			alert("주소를 입력하세요");
 			return false;
@@ -354,6 +355,8 @@ $(function(){
 <!-- 헤더 -->
 	<div id="header">
 		<span>CRUD</span>
+		<a class="btn_top" href="boardList.do">게시판 목록</a>
+		<a class="btn_top" href="userList.do">회원목록</a>
 		<a class="btn_top" href="agreement.do">회원가입</a>
 		<a class="btn_top" href="login.do">로그인</a>
 	</div>
