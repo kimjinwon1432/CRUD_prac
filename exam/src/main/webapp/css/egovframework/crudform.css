@@ -27,6 +27,9 @@
 		padding:5px;
 		width: inherit;
 	}
+	#wrap_cont{
+		min-height: 450px;
+	}
 	.btn_top:hover{
 		background-color: #1a4a70;
    		color: white;

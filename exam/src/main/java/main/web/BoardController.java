@@ -1,5 +1,7 @@
 package main.web;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,33 +27,36 @@ public class BoardController {
 
 	@RequestMapping(value = "/boardList.do")
 	public String boardList(BoardVO vo, ModelMap model) throws Exception {
-		System.out.println("hi");
-		int unit =10;
 		
-		int total=boardService.selectBoardTotal(vo);
-		int totalPage= (int) Math.ceil((double)total/unit);
-		System.out.println(vo.toString());
-		//page number
+		int unit =vo.getUnit();
+		/*
+		 * 검색 시 출력되는 page 최대 번호 */
+		//the number of total data 
+		int total = boardService.selectBoardTotal(vo);
+		int totalPage = (int) Math.ceil((double)total/unit);
+		
+		//1page 1, 10 // 2page -> 11, 20 3page ->21, 30
 		int viewPage = vo.getViewPage();
-		//page number validation.... 
-		if(viewPage > totalPage || viewPage < 1) {
+		
+		if(viewPage > totalPage || viewPage <1) {
 			viewPage =1;
 		}
 		
-		int startIndex = (viewPage-1) * unit +1;
-		int endIndex = startIndex+ unit-1;
-		//행번호
-		int startRowNo = total - (viewPage-1) * unit;
+		int startIndex=(viewPage-1) * unit +1;
+		int endIndex = startIndex +(unit-1);
+		int startRowNo = total - (viewPage-1)*unit;
 		
 		vo.setStartIndex(startIndex);
 		vo.setEndIndex(endIndex);
+		
+		
 		List<?> list = boardService.selectBoardList(vo);
 		
 		model.addAttribute("resultList", list);
-		model.addAttribute("rowNumber", startRowNo);
-		model.addAttribute("resultTotal", total);
-		model.addAttribute("totalPage",totalPage);
-		model.addAttribute("resultList",list);
+		model.addAttribute("total", total);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("rowNumber",startRowNo);
+		
 		return "CRUD/boardList";
 	}
 	
@@ -73,6 +78,59 @@ public class BoardController {
 		
 		
 		return msg;
+	}
+	
+	@RequestMapping(value="/boardDetail.do")
+	public String boardDetail(int boardNum, ModelMap model) throws Exception{
+		boardService.updateHits(boardNum);
+		BoardVO vo = boardService.selectBoardDetail(boardNum);
+		
+		String contents = vo.getContents(); // \n 문자 치환
+		vo.setContents(contents.replace("\n",  "<br>"));
+		
+		model.addAttribute("boardVO", vo);
+		return "CRUD/boardDetail";
+	}
+	
+	/*
+	 * 수정 페이지 출력
+	 */
+	@RequestMapping(value="/boardModifyWrite.do")
+	public String selectBoardModify(int boardNum, ModelMap model) throws Exception{
+		
+		BoardVO vo = boardService.selectBoardDetail(boardNum);
+		model.addAttribute("boardVO", vo);
+		
+		return "CRUD/boardModifyWrite";
+	}
+	/*
+	 * 수정 버튼 클릭 시 
+	 */
+	@RequestMapping(value="/boardModifySave.do")
+	@ResponseBody
+	public String updateBoard(BoardVO vo, ModelMap model) throws Exception{
+//		Timestamp updatedate = new Timestamp(System.currentTimeMillis());
+//		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH24:MI:SS");
+//		System.out.println(sdf.format(updatedate));
+//		vo.setUpdatedate(sdf.format(updatedate));
+		
+		int result = boardService.updateBoard(vo);
+		
+		System.out.println("boardModifySave2");
+		model.addAttribute("boardnum", vo.getBoardnum());
+		String msg=(result>0)?"success":"fail";
+		return msg;
+	}
+	@RequestMapping(value="boardDelete.do")
+	@ResponseBody
+	public String boardDelete(int boardnum, ModelMap model) throws Exception {
+		System.out.println("boardnum: " + boardnum);
+		int result = boardService.boardDelete( boardnum);
+		String msg = (result >0)? "success" : "fail";
+		
+		return msg;
+		
+		
 	}
 	
 }

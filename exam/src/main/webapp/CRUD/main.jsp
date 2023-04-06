@@ -67,14 +67,8 @@
 <script type="text/javascript">
 	</script>
 
-<body>
-	<div id="header">
-		<span>CRUD</span>
-		<a class="btn_top" href="boardList.do">게시판 목록</a>
-		<a class="btn_top" href="userList.do">회원목록</a>
-		<a class="btn_top" href="agreement.do">회원가입</a>
-		<a class="btn_top" href="login.do">로그인</a>
-	</div>
+<body><%@ include file="../include/topmenu.jsp" %>
+
 	<div id="wrap_cont">
 		<div id="content01">
 			main Page

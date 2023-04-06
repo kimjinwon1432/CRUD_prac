@@ -33,17 +33,23 @@ public class CrudController {
 	
 	// login processing
 	@RequestMapping(value= "/loginCheck.do")
-	public String loginCheck(CrudVO vo, HttpSession session) {
+	@ResponseBody
+	public String loginProcessing(CrudVO vo, HttpSession session) throws Exception{
 		
-		boolean result = true;
+		String message="";
+		int count = crudService.selectUserCount(vo);
+		if(count == 1) {
+			//session 생성
+			session.setAttribute("SessionUserID", vo.getId());
+			//session 처리
+			message="success";
+		}
 //		crudService.loginCheck(vo, session);
 		
 		//login success
-		if(result == true) {
-			
-		}
+		
 		//login fail
-		return null;
+		return message;
 		
 	}
 	
@@ -128,6 +134,7 @@ public class CrudController {
 		return "/CRUD/userList";
 	}
 
+	
 	@RequestMapping(value = "/userDetail.do")
 	public String userDetail(String id, ModelMap model) throws Exception {
 		CrudVO vo = crudService.selectUserdetail(id);

@@ -31,7 +31,33 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int selectBoardTotal(BoardVO vo) throws Exception {
 		// TODO Auto-generated method stub
+//		System.out.println("Impl..total..vo hi"+ vo.toString());
 		return boardDAO.selectBoardTotal(vo);
+	}
+
+	@Override
+	public BoardVO selectBoardDetail(int boardNum) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.selectBoardDetail(boardNum);
+	}
+
+	@Override
+	public int updateBoard(BoardVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("updateBoard... vo: "+vo.toString());
+		return boardDAO.updateBoard(vo);
+	}
+
+	@Override
+	public int updateHits(int boardnum) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.updateHits(boardnum);
+	}
+
+	@Override
+	public int boardDelete(int boardnum) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.boardDelete(boardnum);
 	}
 
 }

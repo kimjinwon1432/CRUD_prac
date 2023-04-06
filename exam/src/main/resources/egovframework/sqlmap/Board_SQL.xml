@@ -4,7 +4,7 @@
 <sqlMap namespace="BoardSpace">
 
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
-	<typeAlias  alias="boardVO" type="main.service.boardVO"/>
+	<typeAlias  alias="boardVO" type="main.service.BoardVO"/>
 
 	<insert id="boardDAO.insertBoard">
 	insert into board(boardnum, title, id, contents, file_path, hits) 
@@ -29,14 +29,42 @@
 							id, 
 							TO_CHAR(regdate,'YYYY/MM/DD HH24:MI:SS') regdate, 
 							hits 
-					FROM 	board) a ) b
+					FROM 	board
+					<isNotNull property="searchType">
+					WHERE	$searchType$ like '%' || #searchText# || '%'
+					</isNotNull>
+					) a ) b
 	<![CDATA[ 
 		WHERE rn >= $startIndex$ and rn <= $endIndex$
  	]]>
 	</select>
 	
-	<select id="selectBoardTotal" resultClass="java.lang.Integer">
-		SELECT COUNT(*) total FROM board
+	<select id="boardDAO.selectBoardTotal" resultClass="java.lang.Integer">
+		SELECT COUNT(*) total 
+		FROM board
+<!-- 		<isNotNull property="searchType"> -->
+<!-- 		WHERE	$searchType$ like '%' || #searchText# || '%'  -->
+<!-- 		</isNotNull> -->
 	</select>
-
+	
+	<select id="boardDAO.selectBoardDetail" resultClass="boardVO">
+		SELECT * FROM board WHERE boardnum = #boardNum#
+	</select>
+	<update id="boardDAO.updateHits">
+		update board
+			set	hits= hits+1
+			WHERE boardnum=#boardnum#
+	</update>
+	<update id="boardDAO.updateBoard" >
+		UPDATE board 
+		set 	title=#title# 
+				,contents=#contents# 
+				,updatedate=TO_CHAR(SYSTIMESTAMP, 'yyyy/mm/dd hh24:mi:ss')
+<!-- 				,file_path=#file_path# -->
+		WHERE boardnum = #boardnum#
+	</update>
+	
+	<delete id="boardDAO.boardDelete">
+		DELETE FROM board WHERE boardnum=#boardnum#
+	</delete>
 </sqlMap>

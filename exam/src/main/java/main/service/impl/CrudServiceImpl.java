@@ -87,5 +87,11 @@ public class CrudServiceImpl implements CrudService{
 		return crudDAO.sortUserListByAgreedate();
 	}
 
+	@Override
+	public int selectUserCount(CrudVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return crudDAO.selecUserCount(vo);
+	}
+
 
 }

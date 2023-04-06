@@ -87,7 +87,8 @@ CREATE table board(
     file_path   VARCHAR(500) default null,
 --    file_size   INTEGER default 0,
     updatedate  TIMESTAMP default null,
-    regdate     DATE DEFAULT TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') NOT NULL,
+--    regdate     DATE DEFAULT TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') NOT NULL,
+    regdate     TIMESTAMP DEFAULT TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS') NOT NULL,
     hits        NUMBER default 0,
     
     CONSTRAINT board_pk PRIMARY KEY(boardnum),
@@ -115,8 +116,14 @@ insert into board(boardnum, title, id, contents, pile_path, pile_size, regdate, 
             0);
         
 select * from board;   
+SELECT boardnum, to_char(SYSTIMESTAMP,'yyyy/mm/dd hh24:mi:ss') from board;
 drop table board;
-
+UPDATE board set title='안녕하세연', 
+        contents='방가워여', 
+        updatedate=TO_DATE(SYSTIMESTAMP, 'yyyy/mm/dd hh24:mi:ss'), 
+        file_path='' 
+where boardnum=2;
+update board set hits= hits+1 WHERE boardnum = 2;
 SELECT b.* FROM(
     SELECT rownum rn, a.* 
         FROM (
@@ -127,6 +134,9 @@ SELECT b.* FROM(
                     hits
             FROM board) a ) b
 WHERE rn >= 1 and rn <=5;  
+
+SELECT COUNT(*) total FROM board;
+SELECT * FROM board WHERE boardnum=2;
 create table exam01(
     id DATA PRIMARY KEY
 );

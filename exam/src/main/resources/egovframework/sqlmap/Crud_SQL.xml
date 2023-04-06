@@ -41,15 +41,15 @@
 		WHERE u.id = #id#
 	</select>
 
-	<update id="crudDAO.modifyUser" >
-		UPDATE userinfo  
-			set	name=#name#, 
-				email=#email#, 
-				phone=#phone#, 
-				address=#address#, 
-				postnum=#postNum#
-			WHERE id like #id#
-	</update>
+		<update id="crudDAO.modifyUser" >
+			UPDATE userinfo  
+				set	name=#name#, 
+					email=#email#, 
+					phone=#phone#, 
+					address=#address#, 
+					postnum=#postNum#
+				WHERE id like #id#
+		</update>
 	
 	<delete id="crudDAO.userDelete">
 		DELETE FROM userinfo WHERE id like #id#
@@ -62,5 +62,10 @@
 	<delete id="crudDAO.agreeDelete">
 		DELETE FROM agreement WHERE id like #id#
 	</delete>
+	<select id="crudDAO.selecUserCount" resultClass="java.lang.Integer">
+		 SELECT COUNT(*) 
+		 FROM logininfo	
+		 WHERE id=#id# AND password=#password#
+	</select>
 	
 </sqlMap>	

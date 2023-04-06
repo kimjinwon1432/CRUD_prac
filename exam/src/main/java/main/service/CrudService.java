@@ -16,5 +16,9 @@ public interface CrudService {
 	public int agreeDelete(String id) throws Exception;
 	public List<?> sortUserListById() throws Exception;
 	public List<?> sortUserListByAgreedate() throws Exception;
+	/*
+	 * 로그인 데이터 확인 
+	 */
+	public int selectUserCount(CrudVO vo) throws Exception;
 }
 

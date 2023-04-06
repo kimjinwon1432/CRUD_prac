@@ -12,6 +12,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/main.css'/>"/>
 	<style>
 	html,body{
 		margin: auto 0;
@@ -46,20 +47,48 @@
 	.loginText{
 		text-align: center;
 	}
-	
-	
 	</style>
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/main.css'/>"/>
+<script>
+$(function(){
+	var id=$("#id").val();
+	if(id=="") {
+		alert("아이디를 입력해주세요.");
+		$("#id").focus();
+		return false;
+	}
+	if($("#password")=="") {
+		alert("비밀번호를 입력해주세요.");
+		$("#password").focus();
+		return false;
+	}
+	
+	$.ajax({
+		type: "POST",
+		data: "id="+id+"password="+password, //json(전송)타입
+		url:"loginCheck.do",
+		dataType:"text", //리턴타입
+		
+		success: function(result) {
+			if(result == "success"	{
+				alert(id + "님 로그인 되었습니다.");
+				location = "mainPage.do";
+			}) else{
+				alert("로그인 정보를 다시 확인해 주세요.");
+			}
+		},
+		error: function (result) {
+			alert("오류발생");
+		}
+	});
+	
+});
+</script>
+
 </head>
+
+<%@ include file="../include/topmenu.jsp" %>
+
 <body>
-<!-- 헤더 -->
-	<div id="header">
-		<span>CRUD</span>
-		<a class="btn_top" href="boardList.do">게시판 목록</a>
-		<a class="btn_top" href="userList.do">회원목록</a>
-		<a class="btn_top" href="agreement.do">회원가입</a>
-		<a class="btn_top" href="login.do">로그인</a>
-	</div>
 <!-- 본문 -->
 	<div id="wrap_cont">
 	<form name="frm" method="post" action="loginCheck.do">

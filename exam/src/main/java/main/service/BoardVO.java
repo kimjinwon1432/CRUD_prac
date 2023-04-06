@@ -5,17 +5,39 @@ public class BoardVO {
 	private String title;
 	private String id;
 	private String contents;
-	private String file_path;
-	private String file_size;
+	private String file_path="";
+//	private String file_size;
 	private	String updatedate;
 	private String regdate;
 	private int hits;
 	
+	private String searchType;
+	private String searchText;
+
 	private int viewPage	=1;
 	private int startIndex	=1;
 	private int endIndex	=10;
 	//5, 10, 15개씩 보기 선택 시 사용할 변수
-	//int view;
+	private int unit=10;
+	
+	public int getUnit() {
+		return unit;
+	}
+	public void setUnit(int unit) {
+		this.unit = unit;
+	}
+	public String getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
 		
 	public int getViewPage() {
 		return viewPage;
@@ -67,12 +89,6 @@ public class BoardVO {
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
 	}
-	public String getFile_size() {
-		return file_size;
-	}
-	public void setFile_size(String file_size) {
-		this.file_size = file_size;
-	}
 	public String getUpdatedate() {
 		return updatedate;
 	}
@@ -94,7 +110,7 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [boardnum=" + boardnum + ", title=" + title + ", id=" + id + ", contents=" + contents
-				+ ", file_path=" + file_path + ", file_size=" + file_size + ", updatedate=" + updatedate + ", regdate="
+				+ ", file_path=" + file_path + ", updatedate=" + updatedate + ", regdate="
 				+ regdate + ", hits=" + hits + ", viewPage=" + viewPage + ", startIndex=" + startIndex + ", endIndex="
 				+ endIndex + "]";
 	}

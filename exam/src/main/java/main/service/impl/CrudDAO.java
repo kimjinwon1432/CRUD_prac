@@ -64,12 +64,7 @@ public class CrudDAO extends EgovAbstractDAO{
 
 	public List<?> sortUserList(String sort) {
 		// TODO Auto-generated method stub
-		if(sort.equals("id"))
-				return list("crudDAO.sortUserListById",sort);
-		else if (sort.equals("agreedate"))
-				return list("crudDAO.sortUserListByAgreedate",sort);
-		else  
-				return list("crudDAO.selectUserList", sort);
+		return list("crudDAO.selectUserList", sort);
 	}
 	public List<?> sortUserListById() {
 		// TODO Auto-generated method stub
@@ -79,6 +74,11 @@ public class CrudDAO extends EgovAbstractDAO{
 	public List<?> sortUserListByAgreedate() {
 		// TODO Auto-generated method stub
 		return list("crudDAO.sortUserListByAgreedate");
+	}
+
+	public int selecUserCount(CrudVO vo) {
+		// TODO Auto-generated method stub
+		return (int) select("crudDAO.selecUserCount",vo);
 	}
 
 	
