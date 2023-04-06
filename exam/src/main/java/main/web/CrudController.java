@@ -173,6 +173,15 @@ public class CrudController {
 
 		return msg;
 	}
+	
+
+	@RequestMapping(value = "/logOut.do")
+	public String logOut(HttpSession session) {
+		//로그아웃을 위한 세션 종료
+		session.removeAttribute("SessionUserID");
+		//message 출력을 위해선 따로 ajax 설정해줘야함.
+		return "/CRUD/agreement";
+	}
 
 
 }

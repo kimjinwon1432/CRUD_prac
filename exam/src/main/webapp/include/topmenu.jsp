@@ -4,7 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>CRUD</title>
+<script>
+$(function(){
+	$("#btn_logOut").click(function(){
+
+		$.ajax({
+			type:"POST",
+			data:"SessionUserID="+${id}, //json 
+			url:"logOut.do",
+			dataType: "text", //리턴타입
+			success: function(result){
+				if(result=="success"){
+					checkID=true;
+					alert("사용가능한 아이디입니다.");
+				}
+				else {
+					checkID=false;
+					alert("이미 사용중인 아이디입니다.");
+					$("#id").focus();
+				}
+			},
+			error: function(){
+				alert("오류발생");
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 <%
@@ -24,7 +51,7 @@
 		} else{
 		%>
 			<a class="btn_top" href="userDetail.do">회원정보</a>
-			<a class="btn_top" href="login.do">로그아웃</a>	
+			<a class="btn_top" id="btn_logOut" href="logOut.do">로그아웃</a>	
 		<%
 		}
 		%>
