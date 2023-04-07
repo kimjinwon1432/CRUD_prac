@@ -39,9 +39,10 @@
 		background-color: #1a4a70;
    		color: white;
 	}
-	#wrap_cont{
-		height:60%;
-	}
+/* 	#wrap_cont{ 
+ 		width: 70%; 
+ 		height:60%; 
+ 	} */
 	
 	
 	.hover{
@@ -52,6 +53,7 @@
 		background-color: #1f4e79;
 		height: 20%;
 	}
+	
 	
 	#content01{
 		margin: auto;
@@ -67,7 +69,8 @@
 <script type="text/javascript">
 	</script>
 
-<body><%@ include file="../include/topmenu.jsp" %>
+<body>
+<%@ include file="../include/topmenu.jsp" %>
 
 	<div id="wrap_cont">
 		<div id="content01">

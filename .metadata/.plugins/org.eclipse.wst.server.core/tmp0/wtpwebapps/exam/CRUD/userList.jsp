@@ -13,6 +13,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <style>
 
 html,body{
@@ -40,6 +41,7 @@ td, th{
 
 </style>
 <script>
+
 $(function(){
 	$("#btnSearch").click(function() {
 		var sortValue= $("#sort").val();
@@ -61,15 +63,8 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- 헤더 -->
-	<div id="header">
-		<span>CRUD</span>
-		<a class="btn_top" href="boardList.do">게시판 목록</a>
-		<a class="btn_top" href="userList.do">회원목록</a>
-		<a class="btn_top" href="agreement.do">회원가입</a>
-		<a class="btn_top" href="login.do">로그인</a>
-	</div>
-	
+<%@ include file="../include/topmenu.jsp" %>
+
 <!-- 본문 -->
 <div id= "wrap_cont">
 

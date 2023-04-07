@@ -39,9 +39,10 @@
 		background-color: #1a4a70;
    		color: white;
 	}
-	#wrap_cont{
-		height:60%;
-	}
+/* 	#wrap_cont{ 
+ 		width: 70%; 
+ 		height:60%; 
+ 	} */
 	
 	
 	.hover{
@@ -52,6 +53,7 @@
 		background-color: #1f4e79;
 		height: 20%;
 	}
+	
 	
 	#content01{
 		margin: auto;
@@ -68,13 +70,8 @@
 	</script>
 
 <body>
-	<div id="header">
-		<span>CRUD</span>
-		<a class="btn_top" href="boardList.do">게시판 목록</a>
-		<a class="btn_top" href="userList.do">회원목록</a>
-		<a class="btn_top" href="agreement.do">회원가입</a>
-		<a class="btn_top" href="login.do">로그인</a>
-	</div>
+<%@ include file="../include/topmenu.jsp" %>
+
 	<div id="wrap_cont">
 		<div id="content01">
 			main Page
