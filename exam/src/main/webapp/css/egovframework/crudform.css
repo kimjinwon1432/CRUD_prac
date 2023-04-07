@@ -29,6 +29,8 @@
 	}
 	#wrap_cont{
 		min-height: 450px;
+		width: 70%;
+		height:60%;
 	}
 	.btn_top:hover{
 		background-color: #1a4a70;

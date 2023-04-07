@@ -5,16 +5,21 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.servlet.ModelAndView;
 
 import main.service.CrudService;
 import main.service.CrudVO;
 
 @Controller
 public class CrudController {
+	//로깅을 위한 변수
+//	private static final Logger logger = LoggerFactory.getLogger(CrudController.class);
 
 	@Resource(name = "crudService")
 	private CrudService crudService;
@@ -30,32 +35,83 @@ public class CrudController {
 
 		return "/CRUD/login";
 	}
-	
-	// login processing
 	@RequestMapping(value= "/loginCheck.do")
 	@ResponseBody
 	public String loginProcessing(CrudVO vo, HttpSession session) throws Exception{
+		String msg ="";
 		
-		String message="";
 		int count = crudService.selectUserCount(vo);
-		if(count == 1) {
-			//session 생성
-			session.setAttribute("SessionUserID", vo.getId());
-			//session 처리
-			message="success";
+		if(count==1) {
+			//create session
+			session.setAttribute("userId", vo.getId());
+			System.out.println("login complete");
+			//processing session
+			msg = "success";
+			
 		}
-//		crudService.loginCheck(vo, session);
 		
-		//login success
-		
-		//login fail
-		return message;
-		
+		return msg;
 	}
 	
-	// logout processing
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		//session end for logout
+		session.removeAttribute("userId");
+		System.out.println("logout Complete");
+		//check session
+		
+//		//all session data delete
+//		session.invalidate();
+		//세션삭제 확인..!
+		
+//		//세션의 값들 모두 삭제
+//		session.invalidate();
+//		//세션 유효 확인
+//	    if (request.isRequestedSessionIdValid() == true) {
+//	        
+//	        System.out.print("세션 아이디가 유효합니다.<hr/>");
+//	    }
+//	   
+//	    else {
+//	       
+//	        out.print("세션 아이디가 유효하지 않습니다.<hr/>");
+//	    }
+		
+		return "/CRUD/login";
+	}
 	
-
+//	// login processing
+//	@RequestMapping(value= "/loginCheck.do")
+//	@ResponseBody
+//	public ModelAndView loginProcessing(CrudVO vo, HttpSession session) throws Exception{
+//		
+//		boolean result = crudService.loginCheck(vo, session);
+//		ModelAndView mav = new ModelAndView();
+//		
+//		
+//		if(result == true) { //login success
+//			//move to main.jsp
+//			mav.setViewName("home");
+//			mav.addObject("msg", "success");
+//		} else { //login fail
+//			//move to login.jsp
+//			mav.setViewName("CRUD/login");
+//			mav.addObject("msg", "failure");
+//		}
+//		return mav;
+//	}
+//	
+//	// logout processing
+//	@RequestMapping(value = "/logout.do")
+//	public ModelAndView logout(HttpSession session) {
+//		//로그아웃을 위한 세션 종료
+//		crudService.logout(session);
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("CRUD/login");
+//		mav.addObject("msg", "logout");
+//		//message 출력을 위해선 따로 ajax 설정해줘야함.
+//		return mav;
+//	}
 	/*
 	 * 회원등록화면
 	 */
@@ -175,13 +231,7 @@ public class CrudController {
 	}
 	
 
-	@RequestMapping(value = "/logOut.do")
-	public String logOut(HttpSession session) {
-		//로그아웃을 위한 세션 종료
-		session.removeAttribute("SessionUserID");
-		//message 출력을 위해선 따로 ajax 설정해줘야함.
-		return "/CRUD/agreement";
-	}
+
 
 
 }

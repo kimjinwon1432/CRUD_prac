@@ -2,6 +2,10 @@ package main.service.impl;
 
 import java.util.List;
 
+//import javax.inject.Inject;
+//import javax.servlet.http.HttpSession;
+
+//import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
@@ -10,6 +14,9 @@ import main.service.CrudVO;
 @Repository("crudDAO")
 public class CrudDAO extends EgovAbstractDAO{
 
+//	@Inject
+//	SqlSession sqlSession; // ibatis 실행 객체
+	
 	public String insertUser(CrudVO vo) {
 		// TODO Auto-generated method stub
 		return (String) insert("crudDAO.insertUser", vo);
@@ -76,10 +83,25 @@ public class CrudDAO extends EgovAbstractDAO{
 		return list("crudDAO.sortUserListByAgreedate");
 	}
 
-	public int selecUserCount(CrudVO vo) {
+	public int selectUserCount(CrudVO vo) {
 		// TODO Auto-generated method stub
-		return (int) select("crudDAO.selecUserCount",vo);
+		return (int) select("crudDAO.selectUserCount", vo);
 	}
-
+	
+//	// 01_01. 회원 로그인 체크
+//	public boolean loginCheck(CrudVO vo) {
+//		// TODO Auto-generated method stub
+//		String name = sqlSession.selectOne("crudDAO.loginCheck", vo);
+//		return (name==null)? false: true;
+//	}
+//	// 01._02. 회원 로그인 정보
+//	public CrudVO viewUser(CrudVO vo) {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectOne("crudDAO.viewUser", vo);
+//	}
+//	// 02. 회원 로그아웃
+//	public void logout(HttpSession session) {
+//		
+//	}
 	
 }

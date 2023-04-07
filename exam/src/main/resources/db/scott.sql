@@ -141,6 +141,27 @@ create table exam01(
     id DATA PRIMARY KEY
 );
 
+SELECT 	u.id id,
+        u.email email,
+        u.name name,
+        ag.agreedate agreedate,
+        l.password password
+FROM userinfo u, logininfo l, agreement ag
+WHERE u.id LIKE l.id AND l.password LIKE 'aA1!';
+
+select * from logininfo;
+
+
+SELECT u.id, u.name, u.phone, u.email FROM userinfo u WHERE u.id 
+LIKE u.id LIKE (SELECT id FROM logininfo WHERE id LIKE 'aaa1' AND password LIKE 'aaa');
+
+
+SELECT u.id, u.name, u.phone, l.password, a.agreedate
+FROM userinfo u
+JOIN logininfo l ON u.id LIKE l.id
+LEFT JOIN agreement a ON u.id LIKE a.id
+WHERE (u.id LIKE 'aaa1') AND (l.password LIKE 'aaa');
+
 --create table phonenum(
 --    pnumber varchar(11) not null PRIMARY KEY,
 --    hi varchar(10) not null

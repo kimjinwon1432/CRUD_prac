@@ -3,6 +3,7 @@ package main.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -90,8 +91,39 @@ public class CrudServiceImpl implements CrudService{
 	@Override
 	public int selectUserCount(CrudVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		return crudDAO.selecUserCount(vo);
+		return crudDAO.selectUserCount(vo);
 	}
+
+//	// 01_01. 회원 로그인 체크
+//	@Override
+//	public boolean loginCheck(CrudVO vo, HttpSession session) {
+//		// TODO Auto-generated method stub
+//		boolean result = crudDAO.loginCheck(vo);
+//		if(result) { //true
+//			CrudVO vo2 = viewUser(vo);
+//			//세션 변수 등록
+//			session.setAttribute("userId", vo2.getId());
+//			session.setAttribute("userName", vo2.getName());
+//			session.setAttribute("userEmail", vo2.getEmail());
+//			session.setAttribute("userPassword", vo2.getPassword());
+//		}
+//		return result;
+//	}
+//	//01_02. 회원 로그인 정보
+//	@Override
+//	public CrudVO viewUser(CrudVO vo) {
+//		// TODO Auto-generated method stub
+//		return crudDAO.viewUser(vo);
+//	}
+//
+//	@Override
+//	public void logout(HttpSession session) {
+//		// TODO Auto-generated method stub
+//		//세션 변수 개별 삭제
+//		// session.removeAttribute("userId");
+//		// 세션 정보를 초기화 시킴
+//		session.invalidate();
+//	}
 
 
 }

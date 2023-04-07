@@ -31,12 +31,15 @@
 							hits 
 					FROM 	board
 					<isNotNull property="searchType">
-					WHERE	$searchType$ like '%' || #searchText# || '%'
+						<isNotNull property="searchText">
+						WHERE	$searchType$ like '%' || #searchText# || '%'
+						</isNotNull>
 					</isNotNull>
 					) a ) b
 	<![CDATA[ 
 		WHERE rn >= $startIndex$ and rn <= $endIndex$
  	]]>
+ 		ORDER BY rn
 	</select>
 	
 	<select id="boardDAO.selectBoardTotal" resultClass="java.lang.Integer">

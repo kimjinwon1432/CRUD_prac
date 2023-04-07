@@ -62,10 +62,33 @@
 	<delete id="crudDAO.agreeDelete">
 		DELETE FROM agreement WHERE id like #id#
 	</delete>
-	<select id="crudDAO.selecUserCount" resultClass="java.lang.Integer">
+	<select id="crudDAO.selectUserCount" resultClass="java.lang.Integer">
 		 SELECT COUNT(*) 
 		 FROM logininfo	
 		 WHERE id=#id# AND password=#password#
 	</select>
 	
+<!-- 	<select id="crudDAO.loginCheck" resultClass="String"> -->
+<!-- 		SELECT	id -->
+<!-- 		FROM	logininfo -->
+<!-- 		WHERE	id=#id# AND password=#password# -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="crudDAO.viewUser" resultClass="crudDAO"> -->
+<!-- 		SELECT 	u.id,  -->
+<!-- 				u.name,  -->
+<!-- 				u.phone,  -->
+<!-- 				u.email,  -->
+<!-- 				l.password,  -->
+<!-- 				a.agreedate -->
+				
+<!-- 		FROM 	userinfo u ,  -->
+<!-- 				agreement a,  -->
+<!-- 				( SELECT id,  -->
+<!-- 						 password -->
+<!-- 				  FROM logininfo  -->
+<!-- 				  WHERE id LIKE #id#  -->
+<!-- 				  		AND password LIKE #password#) l  -->
+<!-- 		WHERE u.id LIKE l.id AND a.id LIKE l.id; -->
+<!-- 	</select> -->
 </sqlMap>	

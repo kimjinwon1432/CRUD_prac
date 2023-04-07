@@ -13,9 +13,9 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
 
 <title>Board Write</title>	
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/exam/script/jquery-ui.js"></script>
 </head>
 <style>
 body{
@@ -23,6 +23,7 @@ body{
 	margin: auto 0;
 	width: 100%;
 }
+
 table{
 	margin: auto;
 	width: 100%;
@@ -33,6 +34,7 @@ th, td{
 	padding: 5px;
 }
 #wrap_cont{
+width: 80%;
 	padding: 2rem;
 	margin: auto;
 }
@@ -47,9 +49,6 @@ th, td{
 
 <script>
 function fn_submit(){
-	
-	//trim() --> 앞뒤공백제거, java,jsp에 있음
-	
 	//jquery
 	if($("#title").val() =="" ){ //jquery 문법... $
 		alert("제목을 입력하세요.");
@@ -110,7 +109,13 @@ function fn_submit(){
 <!-- 	추후 제거 -->
 	<tr>
 		<th><label for="id">id</label></th>
-		<td><input type="text" name="id" id="id" class="input1"/></td>
+		<td>
+			<% if (id ==null) { %>
+				<input type="text" name="id" id="id" class="input1" value="null" readonly/>
+			<%} else { %>
+				<input type = "text" name="id" id="id" class="input1" value=<%=id %> readonly/>
+			<%} %>
+		</td>
 	</tr>
 	<tr>
 		<th>내용</th>
