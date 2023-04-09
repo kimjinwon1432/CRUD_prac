@@ -21,9 +21,6 @@
 		margin: auto;
 		padding-top: 10px;
 	}
-	#frm{
-		text-align: center;
-	}
 	table{
 		width: 80%;
 		margin: auto;
@@ -158,6 +155,7 @@
 <div id= "wrap_cont">
 <form id ="frm" method="post" action="userModifySave.do">
 	<table>
+		<caption> 회원 정보 </caption>
 		<tr>
 			<th>ID</th>
 			<td><c:out value="${crudVO.id }"></c:out>
@@ -169,12 +167,11 @@
 		</tr>
 		<tr>
 			<th><label for="email">이메일</label></th>
-			<td><input type="email" name="email" id="email" value="${crudVO.email }"></td>
+			<td><input type="email" name="email" pattern=".+globex\.com" id="email" value="${crudVO.email }"></td>
 		</tr>
 		<tr>
 			<th><label for="phone">전화번호</label></th>
 			<td id="tr_phone">
-					<input type="text" name="phone" id="phone" maxlength="13" value="${crudVO.phone}"> (예: 010-1234-1234) <br>
 					<input type="text" name="phone1" id="phone1" maxlength="3" value="${crudVO.phone1}" size=2/> -
 					<input type="text" name="phone2" id="phone2" maxlength="4" value="${crudVO.phone2}" size=3/> -
 					<input type="text" name="phone3" id="phone3" maxlength="4" value="${crudVO.phone3}" size=3/>

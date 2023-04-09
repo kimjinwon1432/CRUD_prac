@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
 <style>
 	html,body{
@@ -66,7 +68,9 @@
 		background-color: #1a4a70;
    		color: white;
 	}
-
+#wrap_cont {
+	margin: auto;
+}
 </style>
 </head>
 <body>

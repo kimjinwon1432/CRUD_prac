@@ -2,8 +2,6 @@ package main.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 public interface CrudService {
 	/* 저장처리 */
 	public String insertUser(CrudVO vo) throws Exception;

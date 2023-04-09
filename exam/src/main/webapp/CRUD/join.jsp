@@ -9,7 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CRUD - Member join</title>	
+<title>CRUD</title>	
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -19,9 +20,9 @@
 	}
 	#wrap_cont{	
 		height:60%;
+		margin auto;
 	}
 	#wrap_cont > form > table{
-		margin: auto;
 		padding: 10px;
 	}
 	.check{

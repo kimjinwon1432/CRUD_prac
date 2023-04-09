@@ -10,6 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
 
 <title>Board Write</title>	
@@ -23,6 +24,12 @@ body{
 	margin: auto 0;
 	width: 100%;
 }
+
+#wrap_cont{
+	margin: auto;
+}
+
+
 
 table{
 	margin: auto;

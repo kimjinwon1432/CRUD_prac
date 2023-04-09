@@ -43,7 +43,7 @@ public class CrudController {
 		int count = crudService.selectUserCount(vo);
 		if(count==1) {
 			//create session
-			session.setAttribute("userId", vo.getId());
+			session.setAttribute("loginUserId", vo.getId());
 			System.out.println("login complete");
 			//processing session
 			msg = "success";
@@ -56,7 +56,7 @@ public class CrudController {
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
 		//session end for logout
-		session.removeAttribute("userId");
+		session.removeAttribute("loginUserId");
 		System.out.println("logout Complete");
 		//check session
 		
@@ -79,39 +79,6 @@ public class CrudController {
 		
 		return "/CRUD/login";
 	}
-	
-//	// login processing
-//	@RequestMapping(value= "/loginCheck.do")
-//	@ResponseBody
-//	public ModelAndView loginProcessing(CrudVO vo, HttpSession session) throws Exception{
-//		
-//		boolean result = crudService.loginCheck(vo, session);
-//		ModelAndView mav = new ModelAndView();
-//		
-//		
-//		if(result == true) { //login success
-//			//move to main.jsp
-//			mav.setViewName("home");
-//			mav.addObject("msg", "success");
-//		} else { //login fail
-//			//move to login.jsp
-//			mav.setViewName("CRUD/login");
-//			mav.addObject("msg", "failure");
-//		}
-//		return mav;
-//	}
-//	
-//	// logout processing
-//	@RequestMapping(value = "/logout.do")
-//	public ModelAndView logout(HttpSession session) {
-//		//로그아웃을 위한 세션 종료
-//		crudService.logout(session);
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("CRUD/login");
-//		mav.addObject("msg", "logout");
-//		//message 출력을 위해선 따로 ajax 설정해줘야함.
-//		return mav;
-//	}
 	/*
 	 * 회원등록화면
 	 */
@@ -180,7 +147,7 @@ public class CrudController {
 		// }
 
 		List<?> list = crudService.selectUserList(vo);
-		System.out.println("list:    " + list);
+//		System.out.println("list:    " + list);
 		model.addAttribute("resultList", list);
 		model.addAttribute("sort", vo.getSort());
 
@@ -190,11 +157,36 @@ public class CrudController {
 		return "/CRUD/userList";
 	}
 
+	/*
+	 * 내 정보 페이지
+	 */
+
+	@RequestMapping(value = "/myDetail.do")
+	public String myDetail(HttpSession session, ModelMap model) throws Exception {
+		CrudVO vo = crudService.selectUserdetail((String) session.getAttribute("loginUserId"));
+//		System.out.println("phone: " + vo.getPhone() + " " + vo.getPhone1());
+		
+		//전화번호 출력위한 작업
+		vo.setPhone1((String) vo.getPhone().subSequence(0, 3));
+		vo.setPhone2((String) vo.getPhone().subSequence(3, 7));
+		vo.setPhone3((String) vo.getPhone().subSequence(7, 11));
+
+		model.addAttribute("crudVO", vo);
+		return "/CRUD/myDetail";
+	}
 	
+	/*
+	 * 내정보 수정 시
+	 */
+	
+	
+	/*
+	 * 사용자 목록
+	 */
 	@RequestMapping(value = "/userDetail.do")
 	public String userDetail(String id, ModelMap model) throws Exception {
 		CrudVO vo = crudService.selectUserdetail(id);
-		System.out.println("phone: " + vo.getPhone() + " " + vo.getPhone1());
+//		System.out.println("phone: " + vo.getPhone() + " " + vo.getPhone1());
 
 		vo.setPhone1((String) vo.getPhone().subSequence(0, 3));
 		vo.setPhone2((String) vo.getPhone().subSequence(3, 7));
@@ -204,15 +196,19 @@ public class CrudController {
 		return "/CRUD/userDetail";
 	}
 
+	/*
+	 * 사용자 정보 수정 시 거치는 프로세스 .... after: userDetail.do & myDetail.do
+	 */
+	
 	@RequestMapping(value = "/userModifySave.do")
 	@ResponseBody
 	public String userModifySave(CrudVO vo, ModelMap model) throws Exception {
 
-		System.out.println("vo: " + vo.getId() + " " + vo.getName() + " " + vo.getPhone() + " " + vo.getPostNum());
+//		System.out.println("vo: " + vo.getId() + " " + vo.getName() + " " + vo.getPhone() + " " + vo.getPostNum());
+		vo.setPhone(vo.getPhone1() + vo.getPhone2() + vo.getPhone3());
+
 		int result = crudService.modifyUser(vo);
 		String msg = (result > 0) ? "success" : "fail";
-
-		vo.setPhone(vo.getPhone1() + vo.getPhone2() + vo.getPhone3());
 
 		model.addAttribute("id", vo.getId());
 		return msg;
@@ -230,8 +226,27 @@ public class CrudController {
 		return msg;
 	}
 	
+	@RequestMapping(value="/findID.do")
+	public String findID() {
+		return "/CRUD/findID";
+	}
+	
+
+	@RequestMapping(value="/findIDSub.do")
+	public String findIDSub() throws Exception{
+		return "/CRUD/login";
+	}
 
 
+	@RequestMapping(value="/findPW.do")
+	public String findPW() {
+		return "/CRUD/findPW";
+	}
+
+	@RequestMapping(value="/findPWSub.do")
+	public String findPWSub() throws Exception{
+		return "/CRUD/login";
+	}
 
 
 }

@@ -11,6 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,6 +39,10 @@ td, th{
 }
 #bottom{
 	height: 30px;
+}
+
+#wrap_cont {
+	margin: auto;
 }
 
 </style>
@@ -138,10 +143,11 @@ $(function(){
 		</c:forEach>
 	</div>
 </form>
-<div id="bottom">
-	<a id= "btn_write" href="boardWrite.do">글쓰기</a>
-</div>
-
+	<c:if test="${loginUserId ne null }">
+	<div id="bottom">
+		<a id= "btn_write" href="boardWrite.do">글쓰기</a>
+	</div>
+	</c:if>
 </div>
 
 	

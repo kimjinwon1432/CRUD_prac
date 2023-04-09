@@ -9,6 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
@@ -73,14 +74,7 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- 헤더 -->
-<div id="header">
-	<span>CRUD</span>
-	<a class="btn_top" href="boardList.do">게시판 목록</a>
-	<a class="btn_top" href="userList.do">회원목록</a>
-	<a class="btn_top" href="agreement.do">회원가입</a>
-	<a class="btn_top" href="login.do">로그인</a>
-</div>
+<%@ include file="../include/topmenu.jsp" %>
 
 <div id="wrap_cont">
 <table>

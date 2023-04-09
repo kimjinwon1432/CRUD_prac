@@ -14,6 +14,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/crudform.css'/>"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -115,7 +116,6 @@ function fn_submit(){
 
 <body>
 <%@ include file="../include/topmenu.jsp" %>
-
 <div id="wrap_cont">
 <form id="frm">
 <table>
@@ -132,7 +132,7 @@ function fn_submit(){
 <!-- 	추후 제거 -->
 	<tr>
 		<th><label for="id">작성자</label></th>
-		<td>${boardVO.id }</td>
+		<td id="id">${boardVO.id }</td>
 	</tr>
 	<tr>
 		<th><label for="boardnum">게시물 번호</label></th>
@@ -154,9 +154,17 @@ function fn_submit(){
 	</tr>
 	<tr>
 		<th style="text-align:'center'" colspan=2>
-			<button type="button" onclick="location='boardModifyWrite.do?boardNum=${boardVO.boardnum}'")>수정</button>
-			<button type="button" onclick="location='boardList.do'">목록</button>
-			<button type="button" id="deleteBoard">삭제</button>
+		<c:choose>
+			<c:when test="${ boardVO.id eq loginUserId} "> <!--  조건 선언 -->
+				<button type="button" onclick="location='boardModifyWrite.do?boardNum=${boardVO.boardnum}'")>수정</button>
+				<button type="button" onclick="location='boardList.do'">목록</button>
+				<button type="button" id="deleteBoard">삭제</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" onclick="location='boardList.do'">목록</button>
+			
+			</c:otherwise>
+		</c:choose>
 		</th>
 	</tr>
 </table>

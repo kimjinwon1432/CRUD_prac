@@ -1,10 +1,10 @@
 package main.web;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -96,12 +96,18 @@ public class BoardController {
 	 * 수정 페이지 출력
 	 */
 	@RequestMapping(value="/boardModifyWrite.do")
-	public String selectBoardModify(int boardNum, ModelMap model) throws Exception{
-		
+	public String selectBoardModify(int boardNum,HttpSession session, HttpServletRequest request, ModelMap model) throws Exception{
+		String referer = request.getHeader("referer");
 		BoardVO vo = boardService.selectBoardDetail(boardNum);
-		model.addAttribute("boardVO", vo);
-		
-		return "CRUD/boardModifyWrite";
+		String writer = vo.getId();
+		System.out.println(referer);
+		if(session.getAttribute("userid").equals(writer)) {
+			model.addAttribute("boardVO", vo);
+			return "CRUD/boardModifyWrite";
+		}
+		else {
+			return "redirect:"+referer;
+		}
 	}
 	/*
 	 * 수정 버튼 클릭 시 
