@@ -37,9 +37,6 @@ td, th{
 	padding: 2em;
 	min-width: 650px;
 }
-
-
-
 </style>
 <script>
 
