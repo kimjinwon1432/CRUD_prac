@@ -17,3 +17,10 @@ insert into userinfo(id, name, phone, email, postnum, address) values ('king1', 
 insert into logininfo(id, password) values('king1', 'aA1!');
 insert into agreement(id) values('king1');
 
+select * from userinfo u;
+
+insert into userinfo(id, name, phone, email, postnum, address) values ('asdf1', 'boble', '01012341234', 'aaaa', 'aaa','1234aa');
+insert into logininfo(id, password) values('asdf1', 'aA1!');
+insert into agreement(id) values('asdf1');
+
+

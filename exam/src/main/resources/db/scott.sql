@@ -69,8 +69,6 @@ insert into userinfo(id, name, phone, email, postnum, address) values ('aaa1', '
 UPDATE agreement set agreedate='2023-03-31' where id like 'aa2';
 UPDATE agreement set agreedate='2023-03-29' where id like 'aaa2';
 
-
-
 select * from logininfo;
 select * from board;
 CREATE SEQUENCE board_seq
@@ -94,10 +92,27 @@ CREATE table board(
     CONSTRAINT board_pk PRIMARY KEY(boardnum),
     CONSTRAINT board_fk FOREIGN KEY(id) REFERENCES userinfo(id) ON DELETE CASCADE
 );
+--
+--drop table board;
+--drop sequence board_seq;
 
-drop table board;
-drop sequence board_seq;
+--CREATE CATEGORY TABLE
+CREATE TABLE CATEGORY (
+    cate_name varchar(30) not null,
+    cate_num integer not null,
+    CONSTRAINT cate_pk PRIMARY KEY(cate_num)
+);
+--board category add coloumn... category......
+ALTER TABLE BOARD ADD CATEGORY INTEGER DEFAULT NULL;
+ALTER TABLE BOARD MODIFY CATEGORY INTEGER DEFAULT NULL;
 
+--and add constrain foreign key
+ALTER TABLE BOARD ADD FOREIGN KEY(category) references category(cate_num)
+ON DELETE CASCADE;
+ALTER TABLE BOARD ADD FOREIGN KEY(category) references category(cate_num)
+ON DELETE SET NULL;
+--check board
+select * from board;
 alter table board drop column file_size;
 alter table board modify updatedate default null;
 alter table board modify file_size default 0;
@@ -107,9 +122,9 @@ alter table board rename column pile_size to file_size;
 
 insert into board(boardnum, title, id, contents, pile_path, pile_size, regdate, hits) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä',
+            'ì•ˆë…•í•˜ì„¸ìš”',
             'aa2',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             0,
             null,
@@ -118,8 +133,8 @@ insert into board(boardnum, title, id, contents, pile_path, pile_size, regdate, 
 select * from board;   
 SELECT boardnum, to_char(SYSTIMESTAMP,'yyyy/mm/dd hh24:mi:ss') from board;
 drop table board;
-UPDATE board set title='¾È³çÇÏ¼¼¿¬', 
-        contents='¹æ°¡¿ö¿©', 
+UPDATE board set title='ì•ˆë…•í•˜ì„¸ì—°', 
+        contents='ë°©ê°€ì›Œì—¬', 
         updatedate=TO_DATE(SYSTIMESTAMP, 'yyyy/mm/dd hh24:mi:ss'), 
         file_path='' 
 where boardnum=2;

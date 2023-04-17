@@ -1,78 +1,88 @@
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+UPDATE board SET category = 0
+            WHERE BOARDNUM = 1;
+
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä',
+            'ì•ˆë…•í•˜ì„¸ìš”',
             'aaa1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            1);
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È11³çÇÏ¼¼¿ä',
+            'ì•ˆ11ë…•í•˜ì„¸ìš”',
             'aaa',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            2);
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä',
+            'ì•ˆë…•í•˜ì„¸ìš”',
             'aaa2',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            3);
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä123',
+            'ì•ˆë…•í•˜ì„¸ìš”123',
             'asdf1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
-      
+            0,
+            0);      
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä',
+            'ì•ˆë…•í•˜ì„¸ìš”',
             'asdf1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            1);
             
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä443',
+            'ì•ˆë…•í•˜ì„¸ìš”443',
             'asdf1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            2);
             
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä3',
+            'ì•ˆë…•í•˜ì„¸ìš”3',
             'asdf1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            3);
             
             
-insert into board(boardnum, title, id, contents, file_path, updatedate, hits) 
+insert into board(boardnum, title, id, contents, file_path, updatedate, hits, category) 
     VALUES( board_seq.NEXTVAL,
-            '¾È³çÇÏ¼¼¿ä2',
+            'ì•ˆë…•í•˜ì„¸ìš”2',
             'asdf1',
-            'ÀÎ»çÇÏ´Â ÁßÀÔ´Ï´Ù. ¾È³çÇÏ¼¼¿ä~',
+            'ì¸ì‚¬í•˜ëŠ” ì¤‘ì…ë‹ˆë‹¤. ì•ˆë…•í•˜ì„¸ìš”~',
             '',
             null,
-            0);
+            0,
+            4);
 select * from board;   
 
                   
